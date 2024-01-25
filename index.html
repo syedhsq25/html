@@ -3,7 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <meta
+      name="description"
+      content=" Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam
+    dolores quam hic aut at facilis"
+    />
+    <meta name="keywords" content="syedhsq25, portfolio,hussain.dev" />
+    <meta name="author" content="syedhsq25" />
+    <meta property="og:image" content="http://www.ihussain.dev/photography.jpeg" />
+
     <title>Document</title>
+    <style>
+      .hit {
+        color: burlywood;
+        background-color: whitesmoke;
+        text-align: center;
+        margin: 20px;
+        border: 5px solid green;
+        padding: 20px;
+      }
+      button {
+        color: teal;
+        background: wheat;
+        width: 100px;
+        font-size: x-large;
+        padding: 10px;
+        cursor: pointer;
+      }
+    </style>
   </head>
 
   <body>
@@ -45,5 +74,18 @@
       <dt>WHO</dt>
       <dd>World Health Org.</dd>
     </section>
+    <section class="hit">
+      <h1>
+        JAVASCRIPT IS MY LANGUAGE. Click<span style="color: red"> Hit Me</span>
+        and see the console
+      </h1>
+      <button onclick="doWork(); ">Hit Me</button>
+    </section>
   </body>
+  <script>
+    let count = 0;
+    function doWork() {
+      console.log("you hit me", count++);
+    }
+  </script>
 </html>
