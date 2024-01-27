@@ -4,23 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tables</title>
+    <style>
+      table,
+      tbody,
+      tr,
+      td {
+        border: 2px solid black;
+      }
+    </style>
   </head>
   <body>
     <center>
       <div>
         <h1>Welcome to Maze Game</h1>
         <table>
-          <thead>
-            <tr>
-              <th>1</th>
-              <th>2</th>
-              <th>3</th>
-              <th>4</th>
-              <th>5</th>
-            </tr>
-          </thead>
+          <tbody id="game"></tbody>
         </table>
       </div>
     </center>
   </body>
+  <script>
+    let table = document.getElementById("game");
+    let row,
+      col,
+      counter = 1;
+    for (let i = 1; i <= 10; i++) {
+      row = document.createElement("tr");
+
+      for (let j = 1; j <= 5; j++) {
+        col = document.createElement("td");
+        col.innerText = counter++;
+        row.appendChild(col);
+      }
+      table.appendChild(row);
+    }
+  </script>
 </html>

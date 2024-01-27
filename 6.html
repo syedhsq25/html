@@ -4,6 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      table,
+      tbody {
+        border: 5px solid black;
+      }
+      tr,
+      td {
+        border: 2px solid lightcoral;
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <center>
+      <div>
+        <table>
+          <tbody id="game"></tbody>
+        </table>
+      </div>
+    </center>
+  </body>
+  <script>
+    let table = document.getElementById("game");
+    let row,
+      col,
+      counter = 1;
+    for (let i = 1; i <= 10; i++) {
+      row = document.createElement("tr");
+      for (let j = 1; j <= 10; j++) {
+        col = document.createElement("td");
+        col.innerText = counter++;
+        row.appendChild(col);
+      }
+      table.appendChild(row);
+    }
+  </script>
 </html>
