@@ -30,6 +30,8 @@
     <center>
       <div>
         <h1>Welcome to Maze Game</h1>
+        <h2>Attempts : <span id="attempts"></span></h2>
+
         <table>
           <tbody id="game"></tbody>
         </table>
@@ -37,8 +39,11 @@
     </center>
   </body>
   <script>
+    let score;
+    let attempts = 0;
     const audio = new Audio("c.mp3");
     const tableData = new Array(100);
+    const primes = [2, 3, 5, 7, 11, 13];
     for (let i = 0; i < tableData.length; i++) {
       tableData[i] = i + 1;
     }
@@ -58,12 +63,21 @@
           for (let i = 1; i < 10; i++) {}
           console.log(event.target.innerText);
           let clickedNum = event.target.id;
-          for (let i = 1; i <= 100; i++) {
-            if (i % clickedNum == 0) {
-              audio.play();
-              document.getElementById(i).innerHTML = `
+          if (primes.includes(+clickedNum)) {
+            alert(`you are a looser!`);
+            location.reload("6.html");
+          } else if (clickedNum == 1) {
+            document.getElementById("attempts").innerText = ++attempts;
+            alert(`You are a winner : ${attempts}`);
+          } else {
+            document.getElementById("attempts").innerText = ++attempts;
+            audio.play();
+            for (let i = 1; i <= 100; i++) {
+              if (i % clickedNum == 0) {
+                document.getElementById(i).innerHTML = `
                 <img src="emoticon.jpg" width="34" height="35" />
               `;
+              }
             }
           }
         });
