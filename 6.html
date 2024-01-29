@@ -30,6 +30,7 @@
     </center>
   </body>
   <script>
+    const audio = new Audio("c.mp3");
     const tableData = new Array(100);
     for (let i = 0; i < tableData.length; i++) {
       tableData[i] = i + 1;
@@ -44,7 +45,21 @@
       row = document.createElement("tr");
       for (let j = 1; j <= 10; j++) {
         col = document.createElement("td");
+
         col.innerText = tableData[counter];
+        col.id = tableData[counter];
+        col.addEventListener("click", function (event) {
+          audio.play();
+          for (let i = 1; i < 10; i++) {}
+          console.log(event.target.innerText);
+          let clickedNum = event.target.innerText;
+          for (let i = 1; i <= 100; i++) {
+            if (i % clickedNum == 0) {
+              document.getElementById(i).innerText = "**";
+            }
+          }
+        });
+
         counter++;
         row.appendChild(col);
       }
