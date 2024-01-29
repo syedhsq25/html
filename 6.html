@@ -11,11 +11,18 @@
       }
       table,
       tbody {
-        border: 5px solid black;
+        padding: 5px;
+        border: 2px solid black;
       }
       tr,
       td {
         border: 2px solid lightcoral;
+        width: 40px;
+        height: 40px;
+        padding: 5px;
+      }
+      body {
+        background-color: beige;
       }
     </style>
   </head>
@@ -46,16 +53,17 @@
       for (let j = 1; j <= 10; j++) {
         col = document.createElement("td");
 
-        col.innerText = tableData[counter];
         col.id = tableData[counter];
         col.addEventListener("click", function (event) {
-          audio.play();
           for (let i = 1; i < 10; i++) {}
           console.log(event.target.innerText);
-          let clickedNum = event.target.innerText;
+          let clickedNum = event.target.id;
           for (let i = 1; i <= 100; i++) {
             if (i % clickedNum == 0) {
-              document.getElementById(i).innerText = "**";
+              audio.play();
+              document.getElementById(i).innerHTML = `
+                <img src="emoticon.jpg" width="34" height="35" />
+              `;
             }
           }
         });
