@@ -11,18 +11,28 @@
       }
       table,
       tbody {
-        border: 5px solid black;
+        padding: 5px;
+        border: 2px solid black;
       }
       tr,
       td {
         border: 2px solid lightcoral;
+        width: 40px;
+        height: 40px;
+        padding: 5px;
+        cursor: pointer;
+      }
+      body {
+        background-color: beige;
       }
     </style>
   </head>
   <body>
     <center>
       <div>
-        <h1>Welcome to Maze Game</h1>
+        <h1>Welcome to Maze Game, <span id="player"></span></h1>
+        <h2>Attempts : <span id="attempts"></span></h2>
+
         <table>
           <tbody id="game"></tbody>
         </table>
@@ -30,7 +40,19 @@
     </center>
   </body>
   <script>
+    if (!localStorage.getItem("Winners")) {
+      localStorage.setItem("winners", JSON.stringify([]));
+    }
+    let score;
+    let attempts = 0;
+    const audio = new Audio("c.mp3");
     const tableData = new Array(100);
+    const primes = [2, 3, 5, 7, 11, 13];
+
+    const visitedCells = [];
+
+    const playerName = prompt("Enter your name : ");
+    document.getElementById("player").innerText = playerName;
     for (let i = 0; i < tableData.length; i++) {
       tableData[i] = i + 1;
     }
@@ -44,7 +66,40 @@
       row = document.createElement("tr");
       for (let j = 1; j <= 10; j++) {
         col = document.createElement("td");
-        col.innerText = tableData[counter];
+
+        col.id = tableData[counter];
+        col.addEventListener("click", function (event) {
+          let clickedNum = event.target.id;
+          //check for game over logic
+          if (primes.includes(+clickedNum)) {
+            alert(`you are a looser!`);
+            location.reload("6.html");
+          } else if (clickedNum == 1) {
+            document.getElementById("attempts").innerText = ++attempts;
+            alert(`You are a winner : ${attempts}`);
+            let data = JSON.parse(localStorage.getItem("winners"));
+            data.push({
+              playerName,
+              attempts,
+            });
+            localStorage.setItem("winners", JSON.stringify(data));
+            location.replace(`leaderboard.html?${playerName}`);
+          } else {
+            if (visitedCells.includes(+clickedNum)) {
+            } else {
+              document.getElementById("attempts").innerText = ++attempts;
+              audio.play();
+              for (let i = 1; i <= 100; i++) {
+                if (i % clickedNum == 0) {
+                  document.getElementById(i).style.backgroundColor =
+                    "lightcoral";
+                  visitedCells.push(i);
+                }
+              }
+            }
+          }
+        });
+
         counter++;
         row.appendChild(col);
       }
