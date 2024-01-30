@@ -10,7 +10,14 @@
       <h1>hello</h1>
     </div>
     <script>
-      let head = document.getElementById("new");
+      //steps:
+      /*
+      1) first get the element where we want to modify or update.
+      2) secondly, create an element which we want to add.
+      3)do the modifications.
+      4) parent.appenchild(child)
+      */
+      let head = document.getElementById("new"); 
       let insertHead = document.createElement("h2");
       insertHead.innerText = "bye";
       head.appendChild(insertHead);
