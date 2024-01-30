@@ -2,20 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
     <title>Document</title>
   </head>
   <body>
-    <div class="parent">
-      <h1 class="one">HEllo i am in h1 tag</h1>
-      <p id="new">hehhee</p>
-      <h1 class="two">new hello</h1>
+    <div id="new">
+      <h1>hello</h1>
     </div>
+    <script>
+      let head = document.getElementById("new");
+      let insertHead = document.createElement("h2");
+      insertHead.innerText = "bye";
+      head.appendChild(insertHead);
+      insertHead.style.color = "";
+    </script>
   </body>
-  <script>
-    const a = document.createElement("h1");
-    a.innerHTML = "hello";
-    const p = document.querySelector(".parent");
-    p.appendChild(a);
-  </script>
 </html>
