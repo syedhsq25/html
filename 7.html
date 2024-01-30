@@ -5,5 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <div class="parent">
+      <h1 class="one">HEllo i am in h1 tag</h1>
+      <p id="new">hehhee</p>
+      <h1 class="two">new hello</h1>
+    </div>
+  </body>
+  <script>
+    const a = document.createElement("h1");
+    a.innerHTML = "hello";
+    const p = document.querySelector(".parent");
+    p.appendChild(a);
+  </script>
 </html>
