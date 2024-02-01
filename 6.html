@@ -3,7 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <meta
+      name="description"
+      content=" The FUTURISTIC GAME Developed by Developer Hussain"
+    />
+    <meta name="keywords" content="syedhsq25, portfolio,hussain.dev" />
+    <meta name="author" content="syedhsq25" />
+    <meta property="og:image" content="http://www.ihussain.dev/mine.png" />
+
+    <title>THE MAZE</title>
     <style>
       h1 {
         color: rgb(18, 46, 46);
@@ -12,18 +21,20 @@
       table,
       tbody {
         padding: 5px;
-        border: 2px solid black;
+        border: 2px solid rgb(37, 2, 2);
       }
       tr,
       td {
-        border: 2px solid lightcoral;
+        border: 2px solid rgb(137, 104, 106);
         width: 40px;
         height: 40px;
         padding: 5px;
         cursor: pointer;
+        margin: 10px;
+        text-align: center;
       }
       body {
-        background-color: beige;
+        background-color: rgb(221, 221, 199);
       }
     </style>
   </head>
@@ -40,67 +51,52 @@
     </center>
   </body>
   <script>
-    if (!localStorage.getItem("Winners")) {
-      localStorage.setItem("winners", JSON.stringify([]));
-    }
-    let score;
-    let attempts = 0;
-    const audio = new Audio("c.mp3");
-    const tableData = new Array(100);
-    const primes = [2, 3, 5, 7, 11, 13];
-
-    const visitedCells = [];
-
-    const playerName = prompt("Enter your name : ");
-    document.getElementById("player").innerText = playerName;
+    const ranges = [2, 3, 5, 7, 9, 11, 13]; //13. less than prime numbers 15, lost
+    const tableData = new Array(100); //3.to generate random numbers in the range of 100, we use this approcah so we don't deal with the duplicates and we dont miss out on any other number till 100.
     for (let i = 0; i < tableData.length; i++) {
-      tableData[i] = i + 1;
+      tableData[i] = i + 1; //4. i+1. because we are doign i++ in the loop, and we start from 0 so it sums up to start from 1.
     }
-    tableData.sort((a, b) => Math.random() - 0.5);
-
+    tableData.sort((a, b) => Math.random() - 0.5); //5. jumbling all the numbers
+    const audio = new Audio("c.mp3"); //11 play music logic
     let table = document.getElementById("game");
+    let attempt = 0;
+    document.getElementById("attempts").innerText = attempt;
     let row,
       col,
-      counter = 0;
-    for (let i = 1; i <= 10; i++) {
-      row = document.createElement("tr");
-      for (let j = 1; j <= 10; j++) {
-        col = document.createElement("td");
+      counter = 0; //6. beacuse we go to array and the loop begins
 
-        col.id = tableData[counter];
+    for (let i = 1; i <= 10; i++) {
+      row = document.createElement("tr"); //1
+      for (let j = 1; j <= 10; j++) {
+        col = document.createElement("td"); //2
+        col.innerText = tableData[counter]; //6. array has counter
+        col.id = tableData[counter]; //8
         col.addEventListener("click", function (event) {
-          let clickedNum = event.target.id;
-          //check for game over logic
-          if (primes.includes(+clickedNum)) {
-            alert(`you are a looser!`);
+          //7
+          document.getElementById("attempts").innerText = ++attempt;
+          let clickedNum = event.target.innerText; //7.1
+          audio.play(); //12 // playing here when clicking any td.
+
+          if (ranges.includes(+clickedNum)) {
+            alert("you are the LOOSER ");
             location.reload("6.html");
           } else if (clickedNum == 1) {
-            document.getElementById("attempts").innerText = ++attempts;
-            alert(`You are a winner : ${attempts}`);
-            let data = JSON.parse(localStorage.getItem("winners"));
-            data.push({
-              playerName,
-              attempts,
-            });
-            localStorage.setItem("winners", JSON.stringify(data));
-            location.replace(`leaderboard.html?${playerName}`);
+            //13
+            document.getElementById("attempts").innerText = ++attempt;
+            alert("you won ");
+            location.replace("leaderboard.html");
           } else {
-            if (visitedCells.includes(+clickedNum)) {
-            } else {
-              document.getElementById("attempts").innerText = ++attempts;
-              audio.play();
-              for (let i = 1; i <= 100; i++) {
-                if (i % clickedNum == 0) {
-                  document.getElementById(i).style.backgroundColor =
-                    "lightcoral";
-                  visitedCells.push(i);
-                }
+            for (let i = clickedNum; i <= 100; i++) {
+              //9
+              if (i % clickedNum == 0) {
+                //10
+                document.getElementById(i).innerHTML =
+                  ' <img src="emoticon.jpg" width="35px" height="35px" />';
               }
             }
           }
         });
-
-        counter++;
+        counter++; //till 100 it goes.
         row.appendChild(col);
       }
       table.appendChild(row);
