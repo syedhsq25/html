@@ -2,10 +2,41 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
+    <title>Document</title>
+    <style>
+      .rectangle {
+        margin-top: 20%;
+        width: 100px;
+        height: 50px;
+        background-color: blueviolet;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- in this lab we learn how to use setInterval, clearInterval, computedStyle, how to change the css with javascript -->
+    <center>
+      <div class="rectangle" id="rectangle"></div>
+    </center>
+  </body>
+  <script>
+    let shape = document.getElementById("rectangle");
+    let currentWidth = getComputedStyle(shape).width.split("px")[0];
+    function growUp() {
+      if (currentWidth >= 800) clearInterval(myInterval);
+      shape.style.width = +currentWidth + 2 + "px";
+      currentWidth = getComputedStyle(shape).width.split("px")[0];
+      console.log(currentWidth);
+    }
+    const myInterval = setInterval(growUp, 100);
+  </script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
   <body>
     <h1>in css</h1>
   </body>
+
 </html>
